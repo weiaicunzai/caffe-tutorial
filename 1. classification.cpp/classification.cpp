@@ -194,8 +194,8 @@ static std::vector<int> Argmax(const std::vector<float>& v, int N) {
 
 /* =================================================================
 * Name		:	Classify
-* Parameter :	img => Input image
-				N => N of top N predictions
+* Parameter 	:	img => Input image
+			N => N of top N predictions
 * Action	:	Returns top N predictions for input image
 ==================================================================== */
 std::vector<Prediction> Classifier::Classify(const cv::Mat& img, int N) {
@@ -242,8 +242,8 @@ std::vector<Prediction> Classifier::Classify(const cv::Mat& img, int N) {
 
 /* =================================================================
 * Name		:	Predict
-* Parameter :	img => Input image
-				N	=> N of top N predictions
+* Parameter 	:	img => Input image
+			N => N of top N predictions
 * Action	:	Returns confidence vector for each class
 ==================================================================== */
 std::vector<float> Classifier::Predict(const cv::Mat& img) {
@@ -307,9 +307,9 @@ std::vector<float> Classifier::Predict(const cv::Mat& img) {
 
 /* =================================================================
 * Name		:	WrapInputLayer
-* Parameter :	input_channels => Wrapper of input layer blob
+* Parameter 	:	input_channels => Wrapper of input layer blob
 * Action	:	Make input_channels Wrapper of input layer blob,
-				so we can change input layer blob by changing input_channels
+			so we can change input layer blob by changing input_channels
 ==================================================================== */
 void Classifier::WrapInputLayer(std::vector<cv::Mat>* input_channels) {
 
@@ -364,10 +364,10 @@ void Classifier::WrapInputLayer(std::vector<cv::Mat>* input_channels) {
 
 /* =================================================================
 * Name		:	Preprocess
-* Parameter :	img				=> Input image
-				input_channels	=> Wrapper of input layer blob 
+* Parameter 	:	img => Input image
+			input_channels => Wrapper of input layer blob 
 * Action	:	Set input layer blob data to input image data.
-				Preprocess for forward propagation.
+			Preprocess for forward propagation.
 ==================================================================== */
 void Classifier::Preprocess(const cv::Mat& img,
 	std::vector<cv::Mat>* input_channels) {
