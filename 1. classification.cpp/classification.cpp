@@ -27,9 +27,9 @@ typedef std::pair<string, float> Prediction;
 
 class Classifier {
 public:
-	Classifier(const string& model_file,	// deploy.prototxt		=> This file describe network model.
-		const string& trained_file,			// network.caffemodel	=> Weights of the network model.
-		const string& label_file);			// labels.txx			=> Class label
+	Classifier(const string& model_file,	// deploy.prototxt	=> This file describe network model.
+		const string& trained_file,	// network.caffemodel	=> Weights of the network model.
+		const string& label_file);	// labels.txt		=> Class label
 
 	std::vector<Prediction> Classify(const cv::Mat& img, int N = 5);
 
@@ -43,8 +43,8 @@ private:
 
 private:
 	shared_ptr<Net<float> > net_;		// Representing the network, from input to output
-	cv::Size input_geometry_;			// Width and height of input
-	int num_channels_;					// Number of channels
+	cv::Size input_geometry_;		// Width and height of input
+	int num_channels_;			// Number of channels
 	std::vector<string> labels_;		// Labels
 };
 
@@ -56,9 +56,9 @@ private:
 
 // ################################ CONSTRUCTOR ################################ //
 
-Classifier::Classifier(const string& model_file,	// deploy.prototxt		=> This file describe network model.
-	const string& trained_file,						// network.caffemodel	=> Weights of the network model.
-	const string& label_file) {						// labels.txt			=> Class label
+Classifier::Classifier(const string& model_file,	// deploy.prototxt	=> This file describe network model.
+	const string& trained_file,			// network.caffemodel	=> Weights of the network model.
+	const string& label_file) {			// labels.txt		=> Class label
 #ifdef CPU_ONLY
 	Caffe::set_mode(Caffe::CPU);	// Use CPU
 #else
