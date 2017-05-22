@@ -1,0 +1,79 @@
+name: "Logistic"
+# DataLayer for TRAIN
+layer {
+	name: "data"
+	type: "Data"
+	top: "data"
+	top: "label"
+	include {
+		phase: TRAIN
+	}
+	data_param {
+		source: "D:/NewTracking2/bin/mnist/data/mnist_train_lmdb"
+		batch_size: 64
+		backend: LMDB
+	}
+	transform_param {
+		scale: 0.003921
+	}
+}
+
+# DataLayer for TEST
+layer {
+	name: "training_data"
+	type: "Data"
+	top: "data"
+	top: "label"
+	include {
+		phase: TEST
+	}
+	data_param {
+		source: "D:/NewTracking2/bin/mnist/data/mnist_test_lmdb"
+		batch_size: 128
+		backend: LMDB
+	}
+	transform_param {
+		scale: 0.003921
+	}
+}
+
+# For both of TRAIN and TEST
+layer {
+	name: "fully_connected"
+	type: "InnerProduct"
+	bottom: "data"
+	top: "ip"
+	inner_product_param {
+		num_output: 10
+		weight_filler {
+			type: "xavier"
+		}
+		bias_filler {
+			type: "constant"
+		}
+	}
+}
+
+# SoftmaxWithLossLayer for TRAIN
+layer {
+	name: "loss"
+	type: "SoftmaxWithLoss"
+	bottom: "ip"
+	bottom: "label"
+	top: "loss"
+	include {
+		phase: TRAIN
+	}
+}
+
+# AccuracyLayer for TEST
+layer {
+	name: "accuracy"
+	type: "Accuracy"
+	bottom: "ip"
+	bottom: "label"
+	top: "accr"
+	include {
+		phase: TEST
+	}
+}
