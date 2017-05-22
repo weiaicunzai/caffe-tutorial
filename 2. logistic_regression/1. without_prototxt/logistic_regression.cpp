@@ -25,9 +25,9 @@ typedef double Dtype;
 // 2. b		=> blob						//
 // 3. v		=> vector					//
 //								//
-// Ex. p_data_layer	=>	Parameter for DataLayer		//
-//	   b_data_layer =>	Blob for DataLayer		//
-//	   v_b_data_layer => Vector consistis of b_data_layer	//
+// Ex.	p_data_layer	=>	Parameter for DataLayer		//
+//	b_data_layer	=>	Blob for DataLayer		//
+//	v_b_data_layer	=> Vector consistis of b_data_layer	//
 //								//
 /* ============================================================ */
 
