@@ -16,20 +16,20 @@ using namespace caffe;
 
 typedef double Dtype;
 
-/* ======================== Prefix ======================== */
-//															//
+/* ========================== Prefix ========================== */
+//								//
 // Prefix shows what this variable is briefly and clearly	//
-// and follwing after prefix explains more details.			//
-//															//
-// 1. p		=> parameter									//
-// 2. b		=> blob											//
-// 3. v		=> vector										//
-//															//
-// Ex. p_data_layer	=>	Parameter for DataLayer				//
-//	   b_data_layer =>	Blob for DataLayer					//
+// and follwing after prefix explains more details.		//
+//								//
+// 1. p		=> parameter					//
+// 2. b		=> blob						//
+// 3. v		=> vector					//
+//								//
+// Ex. p_data_layer	=>	Parameter for DataLayer		//
+//	   b_data_layer =>	Blob for DataLayer		//
 //	   v_b_data_layer => Vector consistis of b_data_layer	//
-//															//
-/* ======================================================== */
+//								//
+/* ============================================================ */
 
 int main()
 {
@@ -41,19 +41,19 @@ int main()
 	int iter = 5000;
 	double learning_rate = 0.01;
 
-	/* ========================= Creating Layer ========================= */
-	//																	  //
-	// Creating layers always goes thorugh three steps					  //
-	// a. Make bottom and top blob vectors.								  //
-	// b. Set LayerParameter which is necessary to create layer			  //
-	// c. Create layer using LayerParameter	and connect bottom and top.	  //
-	//																	  //
-	// Then, the question is that how to know what params should be set	  //
-	// http://caffe.berkeleyvision.org/tutorial/layers.html				  //
-	// You can check in this website. Click layer you want to know.		  //
-	// In Parameters section, you can find required parameters			  //
-	//																	  //
-	/* ================================================================== */
+	/* ========================== Creating Layer ========================== */
+	//									//
+	// Creating layers always goes thorugh three steps			//
+	// a. Make bottom and top blob vectors.					//
+	// b. Set LayerParameter which is necessary to create layer		//
+	// c. Create layer using LayerParameter	and connect bottom and top.	//
+	//									//
+	// Then, the question is that how to know what params should be set	//
+	// http://caffe.berkeleyvision.org/tutorial/layers.html			//
+	// You can check in this website. Click layer you want to know.		//
+	// In Parameters section, you can find required parameters		//
+	//									//
+	/* ==================================================================== */
 
 
 	/* 1. DataLayer */
@@ -137,13 +137,13 @@ int main()
 
 
 	/* ============================== Training ============================ */
-	//																		//
-	// Traing always goes thorugh three steps and repeats these	three steps.//
-	// a. Forward Propagation.												//
-	// b. Back Propagation.													//
-	// c. Apply learning rate.												//
-	// d. Update weights.													//
-	//																		//
+	//									//
+	// Traing always goes thorugh three steps and repeats thes three steps. //
+	// a. Forward Propagation.						//
+	// b. Back Propagation.							//
+	// c. Apply learning rate.						//
+	// d. Update weights.							//
+	//									//
 	/* ==================================================================== */
 
 	for (int i = 0; i < 5000; i++)
@@ -178,12 +178,12 @@ int main()
 	}
 
 	/* ================================ Test ============================== */
-	//																		//
+	//									//
 	// a. Change DataParameter to get test data instead of training data.	//
-	// b. Reshape InnerProductLayer	cause batch size is changed.			//
-	// c. Remove SoftmaxWitlLosslayer and attach AccuracyLayer.				//
-	// d. Forward Propagation and get accuracy.								//
-	//																		//
+	// b. Reshape InnerProductLayer	cause batch size is changed.		//
+	// c. Remove SoftmaxWitlLosslayer and attach AccuracyLayer.		//
+	// d. Forward Propagation and get accuracy.				//
+	//									//
 	/* ==================================================================== */
 
 	/* a. Change DataParameter to get test data instead of training data. */
