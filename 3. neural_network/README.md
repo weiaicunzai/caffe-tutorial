@@ -7,9 +7,7 @@ have seen what's going on really in caffe something like how to make layers, how
 and so on just using c++ and caffe. This example will let you know how to do it.
 
 ## 2. using_prototxt
-In this example, make networks, train and get accuracy using simple neural network prototxt file. This example shows how to make
-network using prototxt file and manage it. You will see how to make network from prototxt file, pick some layers up in the network 
-and manage them to make your own machine.
+In this example, make networks, train and get accuracy using simple logistic regression prototxt file. This example shows how to make network using prototxt file, pick some layers up in the network and manage them to make your own machine.
 
 ## Finally...
 After compare these two methods, you will catch that using prototxt is much more convenient because you need to define whole model
