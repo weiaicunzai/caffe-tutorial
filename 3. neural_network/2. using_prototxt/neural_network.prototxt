@@ -1,4 +1,5 @@
-name: "Logistic"
+name: "NeuralNet"
+
 # DataLayer for TRAIN
 layer {
 	name: "data"
@@ -29,7 +30,7 @@ layer {
 	}
 	data_param {
 		source: "D:/NewTracking2/bin/mnist/data/mnist_test_lmdb"
-		batch_size: 10000
+		batch_size: 128
 		backend: LMDB
 	}
 	transform_param {
@@ -37,12 +38,37 @@ layer {
 	}
 }
 
-# For both of TRAIN and TEST
+# Fully Connected 1
 layer {
-	name: "fully_connected"
+	name: "fc1"
 	type: "InnerProduct"
 	bottom: "data"
-	top: "ip"
+	top: "ip1"
+	inner_product_param {
+		num_output: 128
+		weight_filler {
+			type: "xavier"
+		}
+		bias_filler {
+			type: "constant"
+		}
+	}
+}
+
+# Sigmoid
+layer {
+	name: "sigmoid"
+	type: "Sigmoid"
+	bottom: "ip1"
+	top: "sig"
+}
+
+# Fully Connected 2
+layer {
+	name: "fc2"
+	type: "InnerProduct"
+	bottom: "sig"
+	top: "ip2"
 	inner_product_param {
 		num_output: 10
 		weight_filler {
@@ -54,11 +80,11 @@ layer {
 	}
 }
 
-# SoftmaxWithLossLayer for TRAIN
+# Softmax with loss
 layer {
 	name: "loss"
 	type: "SoftmaxWithLoss"
-	bottom: "ip"
+	bottom: "ip2"
 	bottom: "label"
 	top: "loss"
 	include {
@@ -66,14 +92,26 @@ layer {
 	}
 }
 
-# AccuracyLayer for TEST
+# Accuracy
 layer {
 	name: "accuracy"
 	type: "Accuracy"
-	bottom: "ip"
+	bottom: "ip2"
 	bottom: "label"
 	top: "accr"
 	include {
 		phase: TEST
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
