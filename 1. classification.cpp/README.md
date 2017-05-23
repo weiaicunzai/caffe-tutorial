@@ -1,5 +1,5 @@
 # classification.cpp
-This file shows how to do classification in caffe. It is implemented by author and I chang a little bit(delete everything about mean file cause we don't need mean file now) and add comments.
+This file shows how to do classification in caffe. It is implemented by author and I changed a little bit(delete everything about mean file because we don't need mean file now) and add comments.
 I added comments as detail as possible, so I expect everybody can understand what's going on in the code easily.
 To start with this example file, you need to build caffe. After success to build caffe, you can use this example file
 as a main function instead of original one.
