@@ -8,7 +8,7 @@ and so on just using c++ and caffe. This example will let you know how to do it.
 
 ## 2. using_prototxt
 In this example, make networks, train and get accuracy using simple logistic regression prototxt file. This example shows how to make
-network using prototxt file and manage it and pick some layers up in the network and manage them to make your own machine.
+network using prototxt file, pick some layers up in the network and manage them to make your own machine.
 
 ## Finally...
 After compare these two methods, you will catch that using prototxt is much more convenient because you need to define whole model 
