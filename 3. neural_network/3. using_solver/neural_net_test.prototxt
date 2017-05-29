@@ -1,0 +1,58 @@
+name: "NeuralNet"
+layer {
+	name: "data"
+	type: "Input"
+	top: "data"
+	input_param { shape: { dim: 1 dim: 1 dim: 28 dim: 28 } }
+}
+
+# Fully Connected 1
+layer {
+	name: "fc1"
+	type: "InnerProduct"
+	bottom: "data"
+	top: "ip1"
+	inner_product_param {
+		num_output: 128
+		weight_filler {
+			type: "xavier"
+		}
+		bias_filler {
+			type: "constant"
+		}
+	}
+}
+
+# Sigmoid
+layer {
+	name: "sigmoid"
+	type: "Sigmoid"
+	bottom: "ip1"
+	top: "sig"
+}
+
+# Fully Connected 2
+layer {
+	name: "fc2"
+	type: "InnerProduct"
+	bottom: "sig"
+	top: "ip2"
+	inner_product_param {
+		num_output: 10
+		weight_filler {
+			type: "xavier"
+		}
+		bias_filler {
+			type: "constant"
+		}
+	}
+}
+
+# Argmax
+layer {
+	name: "argmax"
+	type: "ArgMax"
+	bottom: "ip2"
+	#bottom: "label"
+	top: "argmax"
+}

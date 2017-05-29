@@ -2,7 +2,7 @@ name: "NeuralNet"
 
 # DataLayer for TRAIN
 layer {
-	name: "mnist"
+	name: "data"
 	type: "Data"
 	top: "data"
 	top: "label"
@@ -21,7 +21,7 @@ layer {
 
 # DataLayer for TEST
 layer {
-	name: "mnist"
+	name: "data"
 	type: "Data"
 	top: "data"
 	top: "label"
@@ -80,18 +80,6 @@ layer {
 	}
 }
 
-# Softmax with loss
-layer {
-	name: "loss"
-	type: "SoftmaxWithLoss"
-	bottom: "ip2"
-	bottom: "label"
-	top: "loss"
-	include {
-		phase: TRAIN
-	}
-}
-
 # Accuracy
 layer {
 	name: "accuracy"
@@ -104,14 +92,14 @@ layer {
 	}
 }
 
-
-
-
-
-
-
-
-
-
-
-
+# Softmax with loss
+layer {
+	name: "loss"
+	type: "SoftmaxWithLoss"
+	bottom: "ip2"
+	bottom: "label"
+	top: "loss"
+	include {
+		phase: TRAIN
+	}
+}
