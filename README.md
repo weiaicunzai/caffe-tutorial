@@ -1,15 +1,20 @@
 ```
-COMMAND="nohup bash /home/baiyu/ViT-pytorch/run1.sh  &> /home/baiyu/ViT-pytorch/ecrc &"
+# first line of your code:
 
-
-python -u run.py  --command  "${COMMAND}"  --num_gpus 2  --sleep_time 30 --max_gpu_mem 0.01
+from gpustats import GPUStats
+gpu_stats = GPUStats(gpus_needed=1, sleep_time=30, exec_thresh=3, max_gpu_mem_avail=0.01, max_gpu_util=0.01)
+gpu_stats.run()
 
 ```
 
-``--num_gpus: number of gpu used by the python program``
+``gpus_needed: num of gpu needed to execute the program``
 
 
-``--max_gpu_mem: memory already used in GPUs``
+``sleep_time: sleep time for each query interval``
 
 
-``--sleep_time: query interval``
+``exec_thresh: how many times of successful query needed before execute programs``
+
+``max_gpu_mem_avail: max percentage of gpu mem already used``
+
+``max_gpu_mem_util: max percentage of gpu mem util, similar to max_gpu_mem_avail``

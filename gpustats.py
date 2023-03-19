@@ -3,6 +3,7 @@ import time
 import random
 from collections import Counter
 import argparse
+import datetime
 
 import GPUtil
 
@@ -42,29 +43,20 @@ class GPUStats:
             return len(avail) >= self.gpus_needed, avail
         return len(avail) >= self.gpus_needed
 
-    def run(self, command):
+    def run(self):
         while True:
             self.sleep()
             self.accumulate()
+            now = datetime.datetime.now()
             avai, gpu_ids = self.if_available(return_gpu_ids=True)
+            print(now, avai, gpu_ids)
 
             if avai:
                 gpu_ids = [str(gpu_id) for gpu_id in gpu_ids]
-                gpu_string = 'export CUDA_VISIBLE_DEVICES={}'.format(','.join(gpu_ids))
-                print(gpu_string + ' && ' + command)
-                os.system(gpu_string + '&&' + command)
+                os.environ('CUDA_VISIBLE_DEVICES') = ','.join(gpu_ids)
                 return
 
-if '__main__' == __name__:
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--command',  type=str, required=True, help='excute command')
-    parser.add_argument('--sleep_time',  type=int, default=50)
-    parser.add_argument('--exec_thresh',  type=int, default=3)
-    parser.add_argument('--max_gpu_mem',  type=float, default=0.01, help='max gpu memory available')
-    parser.add_argument('--max_gpu_util',  type=float, default=0.01, help='max gpu memory available')
-    parser.add_argument('--num_gpus',  type=int, required=True, help='number of GPUs will use for this task')
-    ##
-    args = parser.parse_args()
-    print(args)
-    gpu_stats = GPUStats(gpus_needed=args.num_gpus, sleep_time=args.sleep_time, exec_thresh=args.exec_thresh, max_gpu_mem_avail=args.max_gpu_mem, max_gpu_util=args.max_gpu_util)
-    gpu_stats.run(args.command)
+
+#from gpustats import GPUStats
+#gpu_stats = GPUStats(gpus_needed=1, sleep_time=30, exec_thresh=3, max_gpu_mem_avail=0.01, max_gpu_util=0.01)
+#gpu_stats.run()
