@@ -53,7 +53,7 @@ class GPUStats:
 
             if avai:
                 gpu_ids = [str(gpu_id) for gpu_id in gpu_ids]
-                os.environ('CUDA_VISIBLE_DEVICES') = ','.join(gpu_ids)
+                os.environ['CUDA_VISIBLE_DEVICES'] = ','.join(gpu_ids)
                 return
 
 
