@@ -19,7 +19,12 @@ class GPUStats:
         self.counter = Counter()
 
     def lookup(self):
-        return GPUtil.getAvailable(order='memory', limit=self.total_gpus, maxMemory=self.max_gpu_mem)
+        exlucde_gpus = self.get_exclude_gpus()
+        return GPUtil.getAvailable(
+            order='memory',
+            limit=self.total_gpus,
+            maxMemory=self.max_gpu_mem,
+            excludeID=exlucde_gpus)
 
     def accumulate(self):
         # [int, int, ...]
@@ -28,6 +33,14 @@ class GPUStats:
             self.counter.clear()
         else:
             self.counter.update(gpu_stats)
+
+    def get_exclude_gpus(self):
+        include_ids = os.environ['CUDA_VISIBLE_DEVICES']
+        include_ids = [int(gpuid) for gpuid in include_ids.split(',')]
+        gpu_ids = list(range(self.total_gpus))
+        exclude_gpus = list(set(gpu_ids) - set(include_ids))
+        return exclude_gpus
+
 
     def sleep(self):
         sleep_time = random.gauss(self.sleep_time, self.sleep_time / 5)
@@ -55,7 +68,6 @@ class GPUStats:
                 gpu_ids = [str(gpu_id) for gpu_id in gpu_ids]
                 os.environ['CUDA_VISIBLE_DEVICES'] = ','.join(gpu_ids)
                 return
-
 
 #from gpustats import GPUStats
 #gpu_stats = GPUStats(gpus_needed=1, sleep_time=30, exec_thresh=3, max_gpu_mem_avail=0.01, max_gpu_util=0.01)
