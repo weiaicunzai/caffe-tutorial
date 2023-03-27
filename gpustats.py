@@ -35,6 +35,9 @@ class GPUStats:
             self.counter.update(gpu_stats)
 
     def get_exclude_gpus(self):
+        if 'CUDA_VISIBLE_DEVICES' not in os.environ:
+            return []
+
         include_ids = os.environ['CUDA_VISIBLE_DEVICES']
         include_ids = [int(gpuid) for gpuid in include_ids.split(',')]
         gpu_ids = list(range(self.total_gpus))
